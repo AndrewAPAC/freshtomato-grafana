@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /jffs/tomato-grafana/variables.sh
+source /opt/tomato-grafana/variables.sh
 
 googleping=`ping -c 10 www.google.com | tail -2`
 packet=`echo "$googleping" | tr ',' '\n' | grep "packet loss" | grep -o '[0-9]\+'`

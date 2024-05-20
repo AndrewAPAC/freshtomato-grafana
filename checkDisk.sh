@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /jffs/tomato-grafana/variables.sh
+source /opt/tomato-grafana/variables.sh
 
 for i in $disks; do
  used=0

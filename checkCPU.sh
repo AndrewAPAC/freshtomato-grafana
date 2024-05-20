@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /jffs/tomato-grafana/variables.sh
+source /opt/tomato-grafana/variables.sh
 
 cpu=`cat /proc/stat | head -n1 | sed 's/cpu //'`
 user=`echo $cpu | awk '{print $1}'`

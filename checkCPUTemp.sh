@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /jffs/tomato-grafana/variables.sh
+source /opt/tomato-grafana/variables.sh
 
 cpuTemp=`cat /proc/dmu/temperature  | grep -o '[0-9]\+'`
 
