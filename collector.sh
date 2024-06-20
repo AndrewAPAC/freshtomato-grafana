@@ -1,10 +1,10 @@
 #!/bin/sh
-sh /jffs/tomato-grafana/checkDisk.sh &
-sh /jffs/tomato-grafana/checkBandwidthInterface.sh &
-sh /jffs/tomato-grafana/checkConnections.sh &
-sh /jffs/tomato-grafana/pingGoogle.sh &
-sh /jffs/tomato-grafana/checkLoad.sh &
-sh /jffs/tomato-grafana/checkCPUTemp.sh &
-sh /jffs/tomato-grafana/checkMem.sh &
-sh /jffs/tomato-grafana/checkCPU.sh &
-sh /jffs/tomato-grafana/checkClients.sh &
+sh /opt/tomato-grafana/checkDisk.sh &
+sh /opt/tomato-grafana/checkBandwidthInterface.sh &
+sh /opt/tomato-grafana/checkConnections.sh &
+sh /opt/tomato-grafana/pingGoogle.sh &
+sh /opt/tomato-grafana/checkLoad.sh &
+sh /opt/tomato-grafana/checkCPUTemp.sh &
+sh /opt/tomato-grafana/checkMem.sh &
+sh /opt/tomato-grafana/checkCPU.sh &
+sh /opt/tomato-grafana/checkClients.sh &

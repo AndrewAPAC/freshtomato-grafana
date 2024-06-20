@@ -1,10 +1,10 @@
 #!/bin/sh                                                                                                                               
 
-source /jffs/tomato-grafana/variables.sh
+source /opt/tomato-grafana/variables.sh
 
-[ ! -x /jffs/speedtest/speedtest ] && exit
+[ ! -x /opt/speedtest/speedtest ] && exit
 
-result=`/jffs/speedtest/speedtest -f csv`
+result=`/opt/speedtest/speedtest -f csv`
 down=`echo "$result" | awk -F\" '{print $12}'`
 up=`echo "$result" | awk -F\" '{print $14}'`
 
