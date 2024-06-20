@@ -60,6 +60,6 @@ sh /opt/tomato-grafana/speedTest.sh >/dev/null 2>&1
 
 Run this every 30 minutes, or as often as you would like results recorded.
 
-Import the Grafana dashboard via json file or from this dashboard code: https://grafana.com/grafana/dashboards/21104
+Import the Grafana dashboard via json file or from this dashboard code: https://grafana.com/grafana/dashboards/14237
 
 Enjoy!
