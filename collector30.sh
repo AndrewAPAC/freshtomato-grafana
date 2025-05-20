@@ -1,3 +1,3 @@
 #!/bin/sh
-sleep 20
+sleep 30
 /opt/tomato-grafana/collector.sh

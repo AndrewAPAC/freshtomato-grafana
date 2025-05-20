@@ -1,6 +1,6 @@
 ifserver="influx"
 ifport="8086"
-ifuser="admin"
+ifuser="admin"		# Works if no / password set too
 ifpass="passwerd"
 ifdb="tomato"
 # add any additional mount points to monitor here, space delimited like "/opt /nfs"
@@ -12,7 +12,7 @@ lan=192.168.0.0/24
 # The bridge interface. Usually br0
 bridge=br0
 # LAN device <-> WAN monitoring, space delimited
-devices="tv-living tv-bedroom andrew-server mita-a53 mita-s3 andrew-s23 andrew-a9 bugs pi andrew-pc andrew-a9"
+devices="host1 host2"
 
 # Should not be any need to change below here
 

@@ -3,10 +3,12 @@
 source /opt/tomato-grafana/variables.sh
 
 for i in $disks; do
- used=0
- free=0
- used=`df | grep \ $i$ | awk '{print $3}'`
- free=`df | grep \ $i$ | awk '{print $4}'`
- curl -XPOST 'http://'$ifserver':'$ifport'/write?db='$ifdb -u $ifuser:$ifpass --data-binary 'disk.'$i'.used value='$used
- curl -XPOST 'http://'$ifserver':'$ifport'/write?db='$ifdb -u $ifuser:$ifpass --data-binary 'disk.'$i'.free value='$free
+    df=$(df $i | tail -1)
+    used=$(echo $df | awk '{print $3}')
+    free=$(echo $df | awk '{print $4}')
+    pct=$(echo $df | awk '{print $5}' | sed 's/%//')
+
+    echo "disk.$i.used,router=$_router value=$used $_now"
+    echo "disk.$i.free,router=$_router value=$free $_now"
+    echo "disk.$i.percent,router=$_router value=$pct $_now"
 done

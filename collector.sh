@@ -1,10 +1,22 @@
 #!/bin/sh
-sh /opt/tomato-grafana/checkDisk.sh &
-sh /opt/tomato-grafana/checkBandwidthInterface.sh &
-sh /opt/tomato-grafana/checkConnections.sh &
-sh /opt/tomato-grafana/pingGoogle.sh &
-sh /opt/tomato-grafana/checkLoad.sh &
-sh /opt/tomato-grafana/checkCPUTemp.sh &
-sh /opt/tomato-grafana/checkMem.sh &
-sh /opt/tomato-grafana/checkCPU.sh &
-sh /opt/tomato-grafana/checkClients.sh &
+
+source /opt/tomato-grafana/variables.sh
+
+$_dir/checkDisk.sh > $_datafile 
+$_dir/checkBandwidthInterface.sh >> $_datafile
+$_dir/checkBandwidthDevice.sh >> $_datafile
+$_dir/checkConnections.sh >> $_datafile
+$_dir/checkLoad.sh >> $_datafile
+$_dir/checkCPUTemp.sh >> $_datafile
+$_dir/checkMem.sh >> $_datafile
+$_dir/checkCPU.sh >> $_datafile
+$_dir/checkClients.sh >> $_datafile
+$_dir/checkUsage.sh hour >> $_datafile
+$_dir/checkUsage.sh day >> $_datafile
+$_dir/checkUsage.sh week >> $_datafile
+$_dir/checkUsage.sh month >> $_datafile
+$_dir/pingGoogle.sh >> $_datafile
+
+curl -XPOST "http://$ifserver:$ifport/write?db=$ifdb" -u $ifuser:$ifpass --data-binary @$_datafile
+
+rm -f $_datafile
