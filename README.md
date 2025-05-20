@@ -6,8 +6,11 @@ Scripts to display metrics from routers running FreshTomato. This is forked from
 
 ## Dashboard Preview
 
+### The top third of the router dashboard that shows bandwidth and hostorical usage
 ![Router Dashboard](https://i.imgur.com/0iORuQg.png)
+### The lower part of the dashboard with hardware stats
 ![Router Dashboard - CPU](https://i.imgur.com/YQ1fmVC.png)
+### Each configurable device has bandwidth, usage and health stats displayed
 ![Device Dashboard](https://i.imgur.com/nooSGsC.png)
 
 # Requirements
