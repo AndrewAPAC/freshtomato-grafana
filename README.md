@@ -1,20 +1,24 @@
-# tomato-grafana
+# freshtomato-grafana
 
-Scripts to display metrics from routers running FreshTomato. Developed on Netgear R7000, updated with a Netgear R8000.
+## Please note that this fork is still a work in progress and not the final version
 
-![Dashboard Preview](https://i.imgur.com/fR4c8LC.png)
+Scripts to display metrics from routers running FreshTomato. This is forked from tomato-grafana (https://github.com/ch604/tomato-grafana) but my changes were significant enough to not allow reintegration.
 
-Based on dd-wrt-grafana by Trevor Dodds (https://grafana.com/grafana/dashboards/950), updated for influxdb and freshtomato.
+## Dashboard Preview
+
+![Router Dashboard](https://i.imgur.com/0iORuQg.png)
+![Router Dashboard - CPU](https://i.imgur.com/YQ1fmVC.png)
+![Device Dashboard](https://i.imgur.com/nooSGsC.png)
 
 # Requirements
 
-- Router running FreshTomato (tested on 2021.2 & 2024.1)
+- Router running FreshTomato
 - Server running Grafana
 - Server running InfluxDB (=< 1.8)
 
 # Installation
 
-Enable auth on InfluxDB (on my apt-based debian install, this was at /etc/influxdb/influxdb.conf) and configure a user and password. The router scripts will expect auth for depositing data.
+Optionally enable auth on InfluxDB (on my apt-based debian install, this was at /etc/influxdb/influxdb.conf) and configure a user and password. The router scripts will expect auth for depositing data.
 
 Set up a blank InfluxDB database for storage (after installing influxdb-client, auth into influx from the command line, and run "CREATE DATABASE tomato", or whatever you would like to call it).
 
