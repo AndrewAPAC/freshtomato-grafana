@@ -1,8 +1,19 @@
 # freshtomato-grafana
 
-## Please note that this fork is still a work in progress and not the final version
+Scripts to display metrics from routers running FreshTomato on 
+[Grafana](https://www.grafana.com). This is forked from tomato-grafana 
+(https://github.com/ch604/tomato-grafana) but my changes were significant 
+enough to make integration near impossible.
 
-Scripts to display metrics from routers running FreshTomato. This is forked from tomato-grafana (https://github.com/ch604/tomato-grafana) but my changes were significant enough to not allow reintegration.
+# Additional Features
+
+* Consistent timestamp
+* Monitoring of selected devices
+* Enhanced grafana dashboards
+* Temperature monitoring
+* Reduced calls to influx (one per collection)
+* Saves between router reboots
+* Output to `stdout` for easier debugging of individual scripts
 
 ## Dashboard Preview
 
@@ -15,58 +26,100 @@ Scripts to display metrics from routers running FreshTomato. This is forked from
 
 # Requirements
 
-- Router running FreshTomato
+- Router running FreshTomato - it may work on other variants with some tweaking
 - Server running Grafana
 - Server running InfluxDB (=< 1.8)
 
 # Installation
 
-Optionally enable auth on InfluxDB (on my apt-based debian install, this was at /etc/influxdb/influxdb.conf) and configure a user and password. The router scripts will expect auth for depositing data.
+Optionally enable auth on InfluxDB in `/etc/influxdb/influxdb.conf`) and 
+configure a user and password. The router scripts will use authentication
+if it is set up.
 
-Set up a blank InfluxDB database for storage (after installing influxdb-client, auth into influx from the command line, and run "CREATE DATABASE tomato", or whatever you would like to call it).
-
-Connect Grafana to InfluxDB as a data source using the same username and password you set up for influx auth.
-
-On to the router. Connect and mount a disk to /opt (USB Drive, SD Card, external HDD/SSD. If you already installed Entware, skip this step).
-
-If you want to use JFFS instead, Enable JFFS support on Tomato under Administration -> JFFS
-
-## /opt
-Upload all shell scripts to /opt/tomato-grafana/. 
-
-## /jffs
-Upload all shell scripts to /jffs/tomato-grafana/. 
-Before, or after uploading the scripts, run the following command in the scripts folder to replace /opt with /jffs
-`find . -type f -exec sed -i 's#/jffs/#/opt/#g' {} +`
-
-
-Modify the IP, port, password, and username of your influxdb server in variables.sh. Also add any additional mount points you may want to monitor in this file as well, space-delimited. Scripts do not have to be executable.
-
-For speedtest results, download the Ookla ARM CLI tool from https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-armel.tgz and place its contents into a folder called /opt/speedtest/. The core speedtest binary should be executable.
-
-Add the following three commands under Administration -> Scheduler as custom cron jobs:
+Set up a blank InfluxDB database for storage:
 ```
-sh /opt/tomato-grafana/collector.sh >/dev/null 2>&1
-sh /opt/tomato-grafana/collector20.sh >/dev/null 2>&1
-sh /opt/tomato-grafana/collector40.sh >/dev/null 2>&1
+CREATE DATABASE tomato
+CREATE RETENTION POLICY "180d" ON "tomato" DURATION 180d DEFAULT
 ```
-or, for jffs : 
+I would recommend 180 days as the dashboard shows monthly data for 
+6 months
+
+Connect Grafana to InfluxDB as a data source using the same username and 
+password you set up for influx auth.  
+
+`ssh` access to the router is required which can be set up using the
+web administration page and out of scope for this document.
+
+For storage, the best option is to use a USB thumb drive or similar, with 
+an `ext4` formatted partition and mount on `/opt`
+
+Optionally, but recommended is to install `entware` and a comprehensive
+guide for this and above can be found on the [Entware gitgub home](https://github.com/Entware/Entware/wiki/Install-on-TomatoUSB-and-FreshTomato#entware-on-freshtomato-and-other-tomatousb-forks)
+
+First clone this repository to your computer. If you can do it directly
+to the router then it is also an option but usually `ssh` on tomato is
+not capable of doing this.  Then copy all files to the `/opt` partition
+of your router.
+
 ```
-sh /jffs/tomato-grafana/collector.sh >/dev/null 2>&1
-sh /jffs/tomato-grafana/collector20.sh >/dev/null 2>&1
-sh /jffs/tomato-grafana/collector40.sh >/dev/null 2>&1
+git clone git@github.com:AndrewAPAC/freshtomato-grafana.git
+rsync -av freshtomato-grafana router:/opt
 ```
-These should all run every 1 minute on every day of the week. The collectors will now run every 20 seconds. Additionally, add this cron for the speedtest:
+`ssh` to your router and navigate to `/opt/tomato`.  Copy 
+`variables.sh.tmpl` to `variables.sh` and edit the top section as per
+the comments.
+
+A major enhancement is the addition of `devices`.  This collects 
+bandwidth and usage stats for each device listed. Personally, I include
+items like televisions, phones and tablets as well as the usual laptops
+and desktops. Setting up a static IP address for each device is a good 
+idea for consistent results.
+
+For speedtest results, download the Ookla ARM CLI tool from 
+https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-armel.tgz 
+and place its contents into `/opt/freshtomato-grafana`.
+The core speedtest binary should be executable.  The other files can be
+removed if you like.
+
 ```
-sh /opt/tomato-grafana/speedTest.sh >/dev/null 2>&1
-```
-or, for jffs : 
-```
-sh /opt/tomato-grafana/speedTest.sh >/dev/null 2>&1
+ssh router
+cd /opt/freshtomato-grafana
+wget https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-armel.tgz
+tar xvfz ookla-speedtest-1.2.0-linux-armel.tgz
+chmod 755 /opt/freshtomato-grafana/speedtest 
 ```
 
-Run this every 30 minutes, or as often as you would like results recorded.
+Add cron jobs through the web administration interface: 
+`Administration` -> `Scheduler`. If you would like to run the collectors
+every 20 seconds, add the following three commands under 
+ as custom cron jobs:
+```
+/opt/freshtomato-grafana/collector.sh >/dev/null 2>&1
+/opt/freshtomato-grafana/collector20.sh >/dev/null 2>&1
+/opt/freshtomato-grafana/collector40.sh >/dev/null 2>&1
+```
+For every 30 seconds, use the following instead:
+```
+/opt/freshtomato-grafana/collector.sh >/dev/null 2>&1
+/opt/freshtomato-grafana/collector30.sh >/dev/null 2>&1```
+```
 
-Import the Grafana dashboard via json file or from this dashboard code: https://grafana.com/grafana/dashboards/14237
+These should all run every 1 minute on every day of the week. The 
+collectors will now run every 20 (or 30) seconds.
 
-Enjoy!
+The speedtest does not need to run every minute and can be set up
+separately to run every half hour or hour"
+
+```
+/opt/freshtomato-grafana/speedTest.sh >/dev/null 2>&1
+```
+
+For the dashboards, import the `json` files included
+in the dowload. Once everything has stabilised, I will add 
+the dashboards to https://www.grafana.com/dashboards.  If you
+can let me know of any changes you need to make to anything,
+please let me know so I can update the repository.
+
+
+
+
