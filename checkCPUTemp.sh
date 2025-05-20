@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 
 cpuTemp=$(cat /proc/dmu/temperature  | grep -o '[0-9]\+')
 eth1Temp=$(wl -i eth1 phy_tempsense | awk '{print $1 / 2 + 20}')

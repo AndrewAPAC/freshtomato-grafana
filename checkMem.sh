@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 
 mem=$(cat /proc/meminfo)
 total=$(echo "$mem" | grep ^MemTotal | awk '{print $2}')

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 
 for i in $disks; do
     df=$(df $i | tail -1)

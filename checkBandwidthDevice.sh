@@ -13,7 +13,7 @@
 # Passing -d as the first argument will delete all
 # iptables rules for the given devices
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 
 target=ACCEPT
 delete=0

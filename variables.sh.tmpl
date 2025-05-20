@@ -1,15 +1,20 @@
+# The hostname of your influx server
 ifserver="influx"
+# The port of your influx server
 ifport="8086"
+# Username for influx
 ifuser="admin"		# Works if no / password set too
+# Password for influx
 ifpass="passwerd"
+# influx database name
 ifdb="tomato"
 # add any additional mount points to monitor here, space delimited like "/opt /nfs"
 disks="/opt"
-# add interfaces to gather usage stats
+# add interfaces to gather usage stats, usually vlan2
 wan="vlan2"
-# The LAN subnet for monitoring LAN traffic
+# The LAN subnet for monitoring LAN traffic                                                                   
 lan=192.168.0.0/24
-# The bridge interface. Usually br0
+# The bridge interface. Usually br0                                                                           
 bridge=br0
 # LAN device <-> WAN monitoring, space delimited
 devices="host1 host2"

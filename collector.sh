@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 
 $_dir/checkDisk.sh > $_datafile 
 $_dir/checkBandwidthInterface.sh >> $_datafile

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/tomato-grafana/variables.sh
+source /opt/freshtomato-grafana/variables.sh
 save=$_dir/usage
 
 if [ ! -d $save ]; then
