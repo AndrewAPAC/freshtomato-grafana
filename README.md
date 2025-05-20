@@ -114,10 +114,10 @@ separately to run every half hour or hour"
 /opt/freshtomato-grafana/speedTest.sh >/dev/null 2>&1
 ```
 
-For the dashboards, import the `json` files included
-in the dowload. Once everything has stabilised, I will add 
-the dashboards to https://www.grafana.com/dashboards.  If you
-can let me know of any changes you need to make to anything,
+For the dashboards, import the `router.json` and `devices.json`
+files included in the dowload. Once everything has stabilised,
+I will add the dashboards to https://www.grafana.com/dashboards.
+If you can let me know of any changes you need to make to anything,
 please let me know so I can update the repository.
 
 
