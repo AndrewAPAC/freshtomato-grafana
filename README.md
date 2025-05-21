@@ -108,7 +108,7 @@ every 20 seconds, add the following three commands under
 For every 30 seconds, use the following instead:
 ```
 /opt/freshtomato-grafana/collector.sh >/dev/null 2>&1
-/opt/freshtomato-grafana/collector30.sh >/dev/null 2>&1```
+/opt/freshtomato-grafana/collector30.sh >/dev/null 2>&1
 ```
 
 These should all run every 1 minute on every day of the week. The 
