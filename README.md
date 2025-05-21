@@ -7,9 +7,9 @@ enough to make integration near impossible.
 
 # Additional Features
 
-* Consistent timestamp
-* Monitoring of selected network devices
-* Enhanced grafana dashboards: TV, tablets, phones, laptops, computers
+* Consistent timestamp for influx writes
+* Monitoring of selected network devices: TV, tablets, phones, laptops, computers
+* Enhanced grafana dashboards
 * Temperature monitoring: CPU, network chips
 * Reduced calls to influx (one per collection)
 * Saves of usage parameters between router reboots
