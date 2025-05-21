@@ -17,7 +17,7 @@ enough to make integration near impossible.
 
 ## Dashboard Preview
 
-### The top third of the router dashboard that shows bandwidth and hostorical usage
+### The top third of the router dashboard that shows bandwidth and historical usage
 ![Router Dashboard](https://i.imgur.com/0iORuQg.png)
 ### The lower part of the dashboard with hardware stats
 ![Router Dashboard - CPU](https://i.imgur.com/YQ1fmVC.png)
