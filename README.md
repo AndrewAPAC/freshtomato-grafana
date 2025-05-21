@@ -18,17 +18,24 @@ enough to make integration near impossible.
 ## Dashboard Preview
 
 ### The top third of the router dashboard that shows bandwidth and historical usage
+
+Graphs are shown for hourly, daily, weekly and monthly usage metrics
+
 ![Router Dashboard](https://i.imgur.com/0iORuQg.png)
 ### The lower part of the dashboard with hardware stats
+
+
 ![Router Dashboard - CPU](https://i.imgur.com/YQ1fmVC.png)
+
 ### Each configurable device has bandwidth, usage and health stats displayed
+
 ![Device Dashboard](https://i.imgur.com/nooSGsC.png)
 
 # Requirements
 
 - Router running FreshTomato - it may work on other variants with some tweaking
 - Server running Grafana
-- Server running InfluxDB (=< 1.8)
+- Server running InfluxDB (>= 1.8).  Note: Version 2.x is not supported
 
 # Installation
 
