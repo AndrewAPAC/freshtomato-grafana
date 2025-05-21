@@ -1479,7 +1479,7 @@
           "measurement": "hour.vlan2.receive.bytes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(value) \nFROM \"hour.receive.bytes\" \nWHERE device =~ /^$device$/ AND router =~ /^$router$/ \nAND $timeFilter\nGROUP BY time(10m)",
+          "query": "SELECT mean(value) \nFROM \"hour.receive.bytes\" \nWHERE device =~ /^$device$/ AND router =~ /^$router$/ \nAND $timeFilter\nGROUP BY time($interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1507,7 +1507,7 @@
           "measurement": "hour.vlan2.transmit.bytes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(value)\nFROM \"hour.transmit.bytes\" \nWHERE device =~ /^$device$/ AND router =~ /^$router$/ \nAND $timeFilter\nGROUP BY time(10m)",
+          "query": "SELECT mean(value)\nFROM \"hour.transmit.bytes\" \nWHERE device =~ /^$device$/ AND router =~ /^$router$/ \nAND $timeFilter\nGROUP BY time($interval)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -2241,6 +2241,6 @@
   "timezone": "browser",
   "title": "Fresh Tomato Devices",
   "uid": "tomato-devices",
-  "version": 32,
+  "version": 34,
   "weekStart": ""
 }
